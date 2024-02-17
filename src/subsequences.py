@@ -3,12 +3,13 @@ Program to
     1. print all subsequences of a list
     2. print all subsequences equal to sum k
     3. check if subsequence with sum k exists
+    4. count subsequences with sum k
 """
 
 
 # 1
 def subsequences(idx, lst, arr):
-    if idx >= len(arr):
+    if idx == len(arr):
         result.append(lst[:])
         return
     # Take element
@@ -21,7 +22,7 @@ def subsequences(idx, lst, arr):
 
 # 2
 def subsequenceSum(idx, lst, curr_sum, target, arr):
-    if idx >= len(arr):
+    if idx == len(arr):
         if curr_sum == target:
             result2.append(lst[:])
         return
@@ -35,7 +36,7 @@ def subsequenceSum(idx, lst, curr_sum, target, arr):
 
 # 3
 def checkAnySubsequenceWithSumK(idx, curr_sum, target, arr):
-    if idx >= len(arr):
+    if idx == len(arr):
         if curr_sum == target:
             return True
         else:
@@ -51,6 +52,20 @@ def checkAnySubsequenceWithSumK(idx, curr_sum, target, arr):
     return False
 
 
+# 4
+def countSubsequencesWithSumK(idx, curr_sum, target, arr):
+    if idx == len(arr):
+        if curr_sum == target:
+            return 1
+        else:
+            return 0
+    curr_sum += arr[idx]
+    left = countSubsequencesWithSumK(idx + 1, curr_sum, target, arr)
+    curr_sum -= arr[idx]
+    right = countSubsequencesWithSumK(idx + 1, curr_sum, target, arr)
+    return left + right
+
+
 if __name__ == '__main__':
     result = []
     result2 = []
@@ -63,3 +78,4 @@ if __name__ == '__main__':
     subsequenceSum(0, [], 0, tar, inp)
     print(f"Subsequences with sum {tar}: {result2}")
     print(f"Subsequences with sum {tar} present {checkAnySubsequenceWithSumK(0, 2, tar, inp)}")
+    print(f"Number of subsequences with sum {tar}: {countSubsequencesWithSumK(0, 0, tar, inp)}")
