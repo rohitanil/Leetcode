@@ -1,17 +1,19 @@
-def subsequenceWithSumK(idx, target, arr, lst):
+def subsequenceWithSumK(idx, curr_sum,target, arr, lst):
     if idx == len(arr):
-        if target == 0:
+        if curr_sum == target:
             result.append(lst[:])
         return
-    if arr[idx] <= target:
+    if curr_sum <= target:
+        curr_sum += arr[idx]
         lst.append(arr[idx])
-        subsequenceWithSumK(idx, target - arr[idx], arr, lst)
+        subsequenceWithSumK(idx, curr_sum,target, arr, lst)
+        curr_sum -= arr[idx]
         lst.remove(arr[idx])
-    subsequenceWithSumK(idx + 1, target, arr, lst)
+    subsequenceWithSumK(idx + 1, curr_sum,target, arr, lst)
 
 
 def combinationSum(arr, tar):
-    subsequenceWithSumK(0, tar, arr, [])
+    subsequenceWithSumK(0, 0, tar, arr, [])
     return result
 
 
