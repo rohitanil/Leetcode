@@ -39,8 +39,7 @@ def checkAnySubsequenceWithSumK(idx, curr_sum, target, arr):
     if idx == len(arr):
         if curr_sum == target:
             return True
-        else:
-            return False
+        return False
 
     curr_sum += arr[idx]
     if checkAnySubsequenceWithSumK(idx + 1, curr_sum, target, arr):
@@ -57,8 +56,7 @@ def countSubsequencesWithSumK(idx, curr_sum, target, arr):
     if idx == len(arr):
         if curr_sum == target:
             return 1
-        else:
-            return 0
+        return 0
     curr_sum += arr[idx]
     left = countSubsequencesWithSumK(idx + 1, curr_sum, target, arr)
     curr_sum -= arr[idx]
